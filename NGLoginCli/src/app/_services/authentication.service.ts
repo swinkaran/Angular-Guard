@@ -7,30 +7,31 @@ import { User } from '../_models';
 
 @Injectable()
 export class AuthenticationService {
-
-  constructor(private http: HttpClient) { }
-  user: User;
-
-  login(username: string, password: string): User {
-    alert('authentication service - login');
-
-    //return this.http.post<any>
-    //return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username: username, password: password })
+  private user: User;
+  
+  login(username: string, password: string) {
+    ////return this.http.post<any>(`${config.apiUrl}/users/authenticate`, { username: username, password: password })
+    //return this.http.post<any>(`localhost:4444/users/authenticate`, { username: username, password: password })
     //  .pipe(map(user => {
+    //    // login successful if there's a jwt token in the response
+    //    if (user && user.token) {
+    //      // store user details and jwt token in local storage to keep user logged in between page refreshes
+    //      localStorage.setItem('currentUser', JSON.stringify(user));
+    //    }
 
-    // login successful if there's a jwt token in the response
+    //    return user;
+    //  }));
 
-    //if (user && user.token) {
-    //  // store user details and jwt token in local storage to keep user logged in between page refreshes
-    //  localStorage.setItem('currentUser', JSON.stringify(user));
-    //}
+    this.user = new User();
+    this.user.firstName = 'srikaran';
+    this.user.id = 8855;
+    this.user.lastName = 'n';
+    this.user.username = 'srikarann';
 
-    return user;
-  };
-
+    return this.user;
+  }
 
   logout() {
-    alert('authentication service - logout');
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
   }
