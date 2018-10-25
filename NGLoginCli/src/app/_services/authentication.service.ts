@@ -3,19 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { User } from '../_models';
 
 @Injectable()
 export class AuthenticationService {
-  private user: User;
-  private http: HttpClient;
+  constructor(private http: HttpClient) { }
 
-  //constructor(private http: HttpClient) {
-  //}
-  
   login(username: string, password: string) {
-    //return this.http.post<any>(`${config.apiUrl}/users/authenticate`, { username: username, password: password })
-    return this.http.post<any>(`localhost:4200/users/authenticate`, { username: username, password: password })
+    return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username: username, password: password })
       .pipe(map(user => {
         // login successful if there's a jwt token in the response
         if (user && user.token) {
@@ -25,14 +19,6 @@ export class AuthenticationService {
 
         return user;
       }));
-
-    
-    //this.user.firstName = 'srikaran';
-    //this.user.id = 8855;
-    //this.user.lastName = 'n';
-    //this.user.username = 'srikarann';
-
-    //return this.user;
   }
 
   logout() {
